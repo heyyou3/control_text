@@ -1,0 +1,108 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+namespace Adapter.PrimaryActor {
+
+note bottom of Adapter.PrimaryActor
+責務
+- InputPort の呼び出し
+end note
+
+    class CLIAdapter {
+    }
+    note left: main.kt
+
+    CLIAdapter --> Port.InputPort.ReverseTextInput: call & DI
+}
+
+namespace Adapter.SecondaryActor {
+
+note bottom of Adapter.SecondaryActor
+責務
+- 外部サービスの処理
+    - RDB 書き込み、読み込み
+    - キャッシュサーバ 書き込み、読み込み
+    - FileStorage 書き込み、読み込み
+- Adapter 依存の結果を言語仕様に合わせたプリミティブ型への変換
+end note
+
+    interface ITextAdapter {
+        save(text: String): Boolean
+    }
+
+    class StdOutTextAdapter implements ITextAdapter {
+        save(text: String): Boolean
+    }
+}
+
+namespace Port.InputPort {
+
+note bottom of Port.InputPort
+責務
+- UseCase の呼び出し
+- PrimaryActor から渡された Input の検査
+- PrimaryActor から渡された Input から Domain への変換
+- PrimaryActor への Result 返却
+end note
+
+    class Result {
+        code: Int
+        message: String
+    }
+    class ReverseTextInput {
+        invoke(inputText: String): Result
+    }
+    ReverseTextInput --> Result
+    ReverseTextInput --> Port.UseCase.IReverseTextUseCase
+    ReverseTextInput --> Domain.Text
+}
+
+namespace Port.UseCase {
+
+note bottom of Port.UseCase
+責務
+- ユースケースモデリングに基づく、ビジネスロジックの実行
+end note
+
+    interface IReverseTextUseCase {
+        execute()
+    }
+    class ReverseTextUseCase implements IReverseTextUseCase {
+        execute()
+    }
+
+    ReverseTextUseCase --> Port.OutputPort.IReverseTextOutput
+    ReverseTextUseCase --> Domain.Text
+}
+
+namespace Port.OutputPort {
+
+note bottom of Port.OutputPort
+責務
+- SecondaryAdapter の選択
+- SecondaryAdapter の Result 確認
+end note
+
+    interface IReverseTextOutput {
+        invoke(text: Text): void
+    }
+    class ReverseTextOutput implements IReverseTextOutput {
+        invoke(text: Text): void
+    }
+
+    ReverseTextOutput --> Adapter.SecondaryActor.ITextAdapter
+    ReverseTextOutput --> Domain.Text
+}
+
+namespace Domain {
+    class Text {
+        +text: String
+        -textLimit: Int
+        -ngTexts: String[]
+        -validTextLimit: Boolean
+        -isNgText: Boolean
+    }
+}
+
+
+@enduml

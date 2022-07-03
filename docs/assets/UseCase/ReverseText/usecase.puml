@@ -1,0 +1,5 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+User -> (テキストを逆さ文字にしたい)
+@enduml
