@@ -65,10 +65,10 @@ note bottom of Port.UseCase
 end note
 
     interface IReverseTextUseCase {
-        execute()
+        execute(text: Text)
     }
     class ReverseTextUseCase implements IReverseTextUseCase {
-        execute()
+        execute(text: Text)
     }
 
     ReverseTextUseCase --> Port.OutputPort.IReverseTextOutput
@@ -84,10 +84,10 @@ note bottom of Port.OutputPort
 end note
 
     interface IReverseTextOutput {
-        invoke(text: Text): void
+        save(text: Text): Boolean
     }
     class ReverseTextOutput implements IReverseTextOutput {
-        invoke(text: Text): void
+        save(text: Text): Boolean
     }
 
     ReverseTextOutput --> Adapter.SecondaryActor.ITextAdapter
@@ -99,8 +99,8 @@ namespace Domain {
         +text: String
         -textLimit: Int
         -ngTexts: String[]
-        -validTextLimit: Boolean
-        -isNgText: Boolean
+        -isLimit(text: String): Boolean
+        -isNgText(text: String): Boolean
     }
 }
 
