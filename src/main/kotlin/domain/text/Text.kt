@@ -3,16 +3,16 @@ package domain.text
 import domain.text.Exceptions.LimitOverException
 import domain.text.Exceptions.NgTextException
 
-class Text(val text: String) {
+class Text(val value: String) {
     private val textLimit: Int = 100
     private val ngTexts: List<String> = listOf("ng")
 
     init {
-        if (isLimit(text)) {
+        if (isLimit(value)) {
             throw LimitOverException()
         }
 
-        if (isNgText(text)) {
+        if (isNgText(value)) {
             throw NgTextException()
         }
     }

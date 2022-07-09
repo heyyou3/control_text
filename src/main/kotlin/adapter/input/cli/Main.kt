@@ -14,4 +14,5 @@ fun main() {
         println(res.message)
         exitProcess(res.code.number)
     }
+    println("Response Data is ${res.data}")
 }
