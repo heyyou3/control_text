@@ -1,4 +1,6 @@
-import adapter.text.StdOutTextAdapter
+package adapter.input.cli
+
+import adapter.output.text.StdOutTextAdapter
 import port.reverseText.input.ReverseTextInput
 import port.reverseText.output.ReverseTextOutput
 import port.reverseText.usecase.ReverseTextUseCase

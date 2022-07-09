@@ -96,7 +96,7 @@ end note
 
 namespace Domain {
     class Text {
-        +text: String
+        +value: String
         -textLimit: Int
         -ngTexts: String[]
         -isLimit(text: String): Boolean

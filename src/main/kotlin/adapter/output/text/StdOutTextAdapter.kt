@@ -1,4 +1,4 @@
-package adapter.text
+package adapter.output.text
 
 import domain.text.Text
 
