@@ -6,9 +6,9 @@ import port.reverseText.output.ReverseTextOutput
 import port.reverseText.usecase.ReverseTextUseCase
 import kotlin.system.exitProcess
 
-fun main() {
+fun main(args: Array<String>) {
     val textInput = ReverseTextInput(ReverseTextUseCase(ReverseTextOutput(StdOutTextAdapter())))
-    val res = textInput.invoke("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    val res = textInput.invoke(args[0])
     if (res.code.number != 0) {
         println("Failed execute...")
         println(res.message)
