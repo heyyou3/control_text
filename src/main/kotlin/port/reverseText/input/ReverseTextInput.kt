@@ -4,6 +4,7 @@ import domain.text.Exceptions.LimitOverException
 import domain.text.Exceptions.NgTextException
 import domain.text.Text
 import port.reverseText.usecase.IReverseTextUseCase
+import shared.port.Code
 
 class ReverseTextInput(private val useCase: IReverseTextUseCase) {
     fun invoke(inputText: String): Result {
