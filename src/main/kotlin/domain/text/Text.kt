@@ -18,7 +18,7 @@ class Text(val value: String) {
     }
 
     private fun isLimit(text: String): Boolean {
-        return text.length >= textLimit
+        return text.length > textLimit
     }
 
     private fun isNgText(text: String): Boolean {
