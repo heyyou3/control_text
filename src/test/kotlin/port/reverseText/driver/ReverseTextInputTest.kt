@@ -1,20 +1,20 @@
-package port.reverseText.input
+package port.reverseText.driver
 
 import domain.text.Text
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import port.reverseText.usecase.IReverseTextUseCase
+import port.reverseText.usecase.ReverseTextUseCaseExecutor
 import shared.port.Code
 import kotlin.test.assertEquals
 
-internal class MockUseCase() : IReverseTextUseCase {
+internal class MockUseCaseExecutor() : ReverseTextUseCaseExecutor {
     override fun invoke(text: Text): Text {
         return Text("ABC")
     }
 }
 
-internal class MockExceptionUseCase() : IReverseTextUseCase {
+internal class MockExceptionUseCaseExecutor() : ReverseTextUseCaseExecutor {
     override fun invoke(text: Text): Text {
         throw Exception("Unknown Error")
     }
@@ -29,7 +29,7 @@ internal class ReverseTextInputTest {
 
         @BeforeEach
         fun beforeEach() {
-            val textInput = ReverseTextInput(MockUseCase())
+            val textInput = ReverseTextInput(MockUseCaseExecutor())
             this.result = textInput.invoke("A")
         }
 
@@ -45,7 +45,7 @@ internal class ReverseTextInputTest {
 
         @BeforeEach
         fun beforeEach() {
-            val textInput = ReverseTextInput(MockUseCase())
+            val textInput = ReverseTextInput(MockUseCaseExecutor())
             this.result =
                 // NOTE: 101 Character
                 textInput.invoke("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB")
@@ -66,21 +66,21 @@ internal class ReverseTextInputTest {
     inner class TestNgTextFail() {
         @Test
         fun returnNgTextCodeFail() {
-            val textInput = ReverseTextInput(MockUseCase())
+            val textInput = ReverseTextInput(MockUseCaseExecutor())
             val res = textInput.invoke("ng")
             assertEquals(Code.ASSUMED_FAIL, res.code)
         }
 
         @Test
         fun returnNgTextMessageFail() {
-            val textInput = ReverseTextInput(MockUseCase())
+            val textInput = ReverseTextInput(MockUseCaseExecutor())
             val res = textInput.invoke("ng")
             assertEquals("Input text is ng word!", res.message)
         }
 
         @Test
         fun returnNgUpperCaseFail() {
-            val textInput = ReverseTextInput(MockUseCase())
+            val textInput = ReverseTextInput(MockUseCaseExecutor())
             val res = textInput.invoke("NG")
             assertEquals(Code.ASSUMED_FAIL, res.code)
         }
@@ -90,7 +90,7 @@ internal class ReverseTextInputTest {
     inner class TestUnknownFail() {
         @Test
         fun returnUnknownCodeFail() {
-            val textInput = ReverseTextInput(MockExceptionUseCase())
+            val textInput = ReverseTextInput(MockExceptionUseCaseExecutor())
             val res = textInput.invoke("ABC")
             assertEquals(Code.UNKNOWN_FAIL, res.code)
         }

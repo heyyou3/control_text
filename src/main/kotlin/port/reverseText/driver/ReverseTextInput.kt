@@ -1,12 +1,12 @@
-package port.reverseText.input
+package port.reverseText.driver
 
 import domain.text.Exceptions.LimitOverException
 import domain.text.Exceptions.NgTextException
 import domain.text.Text
-import port.reverseText.usecase.IReverseTextUseCase
+import port.reverseText.usecase.ReverseTextUseCaseExecutor
 import shared.port.Code
 
-class ReverseTextInput(private val useCase: IReverseTextUseCase) {
+class ReverseTextInput(private val useCase: ReverseTextUseCaseExecutor) {
     fun invoke(inputText: String): Result {
         return try {
             val text = Text(inputText)

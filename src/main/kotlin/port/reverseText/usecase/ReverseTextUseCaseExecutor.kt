@@ -2,6 +2,6 @@ package port.reverseText.usecase
 
 import domain.text.Text
 
-interface IReverseTextUseCase {
+interface ReverseTextUseCaseExecutor {
     fun invoke(text: Text): Text
 }

@@ -1,8 +1,8 @@
-package adapter.input.cli
+package adapter.driver.cli
 
-import adapter.output.text.StdOutTextAdapter
-import port.reverseText.input.ReverseTextInput
-import port.reverseText.output.ReverseTextOutput
+import adapter.driven.text.StdOutTextAdapter
+import port.reverseText.driven.ReverseTextOutput
+import port.reverseText.driver.ReverseTextInput
 import port.reverseText.usecase.ReverseTextUseCase
 import kotlin.system.exitProcess
 

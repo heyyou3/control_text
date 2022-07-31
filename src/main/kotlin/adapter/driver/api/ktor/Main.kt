@@ -1,6 +1,6 @@
-package adapter.input.api.ktor
+package adapter.driver.api.ktor
 
-import adapter.output.text.StdOutTextAdapter
+import adapter.driven.text.StdOutTextAdapter
 import io.ktor.http.*
 import io.ktor.serialization.gson.*
 import io.ktor.server.application.*
@@ -9,8 +9,8 @@ import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import port.reverseText.input.ReverseTextInput
-import port.reverseText.output.ReverseTextOutput
+import port.reverseText.driven.ReverseTextOutput
+import port.reverseText.driver.ReverseTextInput
 import port.reverseText.usecase.ReverseTextUseCase
 import shared.port.Code
 import java.text.DateFormat
